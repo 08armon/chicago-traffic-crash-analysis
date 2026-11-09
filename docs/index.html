@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chicago Traffic Crash Maps</title>
+<meta name="description" content="Interactive maps from an analysis of 877,919 reported traffic crashes in Chicago, 2018–2025, by Armon Saeedvafa.">
+<style>
+  :root {
+    --bg: #f7f6f3; --surface: #ffffff; --text: #1d1d1f; --muted: #5c5c63;
+    --line: #e2e0da; --accent: #b3261e; --shadow: 0 1px 2px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151517; --surface: #1f1f23; --text: #ececf0; --muted: #a3a3ad;
+            --line: #2e2e34; --accent: #ff7a6e; --shadow: none; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1080px; margin: 0 auto; padding: 48px 16px 64px; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 8px; }
+  h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin: 0 0 12px; letter-spacing: -.01em; }
+  .lede { color: var(--muted); max-width: 720px; margin: 0 0 20px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 36px; font-size: 15px; }
+  .links a { color: var(--text); text-underline-offset: 3px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 0 0 40px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .stat b { display: block; font-size: 24px; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 14px; }
+  h2 { font-size: 20px; margin: 0 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line);
+          border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; box-shadow: var(--shadow);
+          transition: transform .15s ease, border-color .15s ease; }
+  .card:hover, .card:focus-visible { transform: translateY(-2px); border-color: var(--accent); }
+  .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: var(--line); }
+  .card div { padding: 14px 16px 16px; }
+  .card h3 { font-size: 17px; margin: 0 0 4px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 16px; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Data analysis project</p>
+  <h1>Chicago Traffic Crashes, 2018–2025</h1>
+  <p class="lede">Interactive maps from an analysis of 877,919 reported crashes. The analysis adds traffic volumes and mobility data to separate places and times with <em>more crashes</em> from places and times where each trip is <em>more dangerous</em>.</p>
+  <p class="links">
+    <a href="https://github.com/08armon/chicago-traffic-crash-analysis">Project on GitHub</a>
+    <a href="https://github.com/08armon/chicago-traffic-crash-analysis/blob/main/notebooks/02_analysis.ipynb">Analysis notebook</a>
+  </p>
+
+  <section class="stats" aria-label="Headline numbers">
+    <div class="stat"><b>11.19</b><span>crashes per million vehicle-miles, citywide</span></div>
+    <div class="stat"><b>2.1×</b><span>higher risk per drive on weekday afternoons than overnight</span></div>
+    <div class="stat"><b>22.88</b><span>crashes per million vehicle-miles in West Garfield Park, the highest of 77 areas</span></div>
+    <div class="stat"><b>62.6%</b><span>of crashes happen at intersections</span></div>
+  </section>
+
+  <h2>Maps</h2>
+  <div class="grid">
+    <a class="card" href="maps/crash_density_and_risk.html">
+      <img src="thumbs/crash_density_and_risk.jpg" alt="Heat map of crash density across Chicago" loading="lazy">
+      <div><h3>Crash density and risk</h3><p>Every geocoded crash, with views by severity and time of day, plus crash rates for corridors and intersections.</p></div>
+    </a>
+    <a class="card" href="maps/risk_by_area_and_time.html">
+      <img src="thumbs/risk_by_area_and_time.jpg" alt="Community areas shaded by per-drive crash risk" loading="lazy">
+      <div><h3>Risk by area and time of week</h3><p>Estimated chance that a 10-mile drive involves a crash, for six time windows.</p></div>
+    </a>
+    <a class="card" href="maps/hotspots.html">
+      <img src="thumbs/hotspots.jpg" alt="Map of the top intersections and corridors" loading="lazy">
+      <div><h3>Intersection and corridor hot spots</h3><p>The top 25 locations by crashes, serious crashes and crash rate relative to traffic.</p></div>
+    </a>
+    <a class="card" href="maps/crashes_by_area.html">
+      <img src="thumbs/crashes_by_area.jpg" alt="Community areas shaded by number of crashes" loading="lazy">
+      <div><h3>Crashes by community area</h3><p>Total reported crashes in each of Chicago's 77 community areas.</p></div>
+    </a>
+    <a class="card" href="maps/serious_share_by_area.html">
+      <img src="thumbs/serious_share_by_area.jpg" alt="Community areas shaded by serious-outcome share" loading="lazy">
+      <div><h3>Serious-outcome share</h3><p>Percentage of crashes involving a death or incapacitating injury, by community area.</p></div>
+    </a>
+  </div>
+
+  <footer>
+    By Armon Saeedvafa · Data: City of Chicago Data Portal and Illinois Department of Transportation.
+    Hover over areas and points on each map for details.
+  </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Data files are too large for GitHub; notebook 1 recreates them.
+data/raw/
+data/processed/
+
+# Old cache folders, if notebooks were run before the project was reorganized
+chicago_crash_data/
+chicago_people_data/
+chicago_exposure_data/
+
+# Jupyter and Python clutter
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Operating-system files
+.DS_Store
+Thumbs.db
